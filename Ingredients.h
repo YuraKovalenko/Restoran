@@ -10,10 +10,10 @@
 class Ingredients
 {
 public:
-	void Ingred(std::map <int, std::string> &m);
-	void PrintIngred();
+	void PrintIngred();//ветод для виводу
+	virtual void PrintMessage(std::string s);
 protected:
-	int a;
+	void Ingred(std::map <int, std::string> &m);//метод щоб робить інгредієнти відсутніми
 	std::map <int, std::string> m =//продукти
 	{
 		{ 0, "Томат"},

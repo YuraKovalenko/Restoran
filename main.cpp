@@ -13,11 +13,10 @@ int main()
 {
 	srand(time(0));
 	setlocale(0, "");
-	Menu a;
-	a.PrintMenu();
-	a.PrintIngred();
-	a.Logic();
-	a.PrintMoney();
+	std::cout << "";
+	Menu b;
+	b.Logic();
+	
 	system("pause");
 }
 

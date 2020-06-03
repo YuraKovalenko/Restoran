@@ -1,5 +1,11 @@
 #include "Menu.h"
-
+/*
+	тут відбувається формування замовлення через Logic
+	є функція яка виводить меню в консоль
+	також викликана функція Ingred яка робить деякі продукти відсутніми
+	є методя PrintMoney який повертає гроші які ми маємо заплатить
+	і також 2 допоміжні функції для формулювання меню
+*/
 void Menu::PrintMenu()//реалізація методу виведення
 {
 	std::string s;
@@ -8,21 +14,24 @@ void Menu::PrintMenu()//реалізація методу виведення
 	std::cout << str;
 	std::cout << "\t\t    Menu\n";
 	std::cout << str;
-	PrintMessege("Супы");
+	PrintMessage("Супы (soup№)");
 	PrintMap(soup);
-	PrintMessege("Гарниры");
+	PrintMessage("Гарниры (gar№)");
 	PrintMap(gar);
-	PrintMessege("Салаты");
+	PrintMessage("Салаты (salad№)");
 	PrintMap(salad);
-	PrintMessege("Напитки");
+	PrintMessage("Десерты (desert№)");
+	PrintMap(desert);
+	PrintMessage("Напитки (drink№)");
 	PrintMap(drink);
-	PrintMessege("Спиртное");
+	PrintMessage("Спиртное (alko№)");
 	PrintMap(alko);
 	std::cout << str;
-	Ingred(m);
+	Ingred(m);//деякі продукти відсутні
 }
-
-void Menu::PrintMessege(std::string s)//допоміжний метод для виведення
+//допоміжний метод 
+//допоміжний метод для виведення
+void Ingredients::PrintMessage(std::string s) 
 {
 	std::string str = "=============================================\n";
 	std::cout << str;
@@ -40,10 +49,56 @@ void Menu::PrintMap(std::map<std::string, int> &a)
 	}
 }
 
+//метод через який відбувається замовлення
 void Menu::Logic()
 {
-	for (int i = 0; i < 2; i++)
+	Menu a;
+	std::cout << "Введите (menu) чтоб посмотреть меню\n";
+	std::cout << "Введите (start) чтоб заказать\n";
+	std::cout << "Введите (finish) чтоб закончить\n";
+	std::cout << "Введите (money) чтоб посмотреть счет\n";
+	std::string command;
+	std::cin >> command;
+	while (command != "finish")
 	{
-		Pdish();
+		if (command == "menu")
+		{
+			a.PrintMenu();
+			a.PrintIngred();
+		}
+		if (command == "start")
+		{
+			a.Pdish();
+		}
+		if (command == "money")
+		{
+			a.PrintMoney();
+		}
+		try
+		{
+			if (command != "menu" && command != "start" && command != "money")
+			{
+				throw 1;
+			}
+		}
+		catch (int i)
+		{
+			if (i == 1)
+			{
+				std::cout << "Вы ввели неправильную команду\n";
+			}
+		}
+		std::cout << "Введите (menu) чтоб посмотреть меню\n";
+		std::cout << "Введите (start) чтоб заказать\n";
+		std::cout << "Введите (finish) чтоб закончить\n";
+		std::cout << "Введите (money) чтоб посмотреть счет\n";
+		std::cin >> command;
 	}
+	a.PrintMoney();
+}
+
+void Menu::PrintMoney()//вивід суми
+{
+	std::cout << "Вы должны заплатить : \n";
+	std::cout  << result << "\n";
 }

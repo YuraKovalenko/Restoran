@@ -3,11 +3,10 @@
 
 class Dish : public Ingredients
 {
+protected:
 	int result = 0;//сума по чеку
-public:
 	void Pdish();//метод страв
 	int CountMoney(int n);
-	void PrintMoney();
 	std::map<std::string, int> soup =//контейнер де зберігається страва і її ціна за мінімальну порцію
 	{
 		{"Борщ",60},
